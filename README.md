@@ -4,7 +4,7 @@
 
 ## User Story
 ```
-
+As a user, I want to add my favorite burger to the list, and be able to eat it by the click of button. 
 ```
 ## Website Functionality
 ```
@@ -26,7 +26,7 @@ THEN
 ```
 ## Review
 * The URL of the deployed application. 
-
+https://burgerbars.herokuapp.com/
 
 * The URL of the GitHub repository
- https://github.com/destaneelg/
+https://github.com/destaneelg/burgerBars

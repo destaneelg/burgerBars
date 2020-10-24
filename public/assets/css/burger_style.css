@@ -1,0 +1,9 @@
+.white-box {
+    background-color: white;
+    color: black;
+   
+}
+.burgerImage{
+    max-height: 200px;
+    max-width: 200px;
+}
