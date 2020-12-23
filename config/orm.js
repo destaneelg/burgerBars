@@ -4,9 +4,7 @@ var orm = {
     var queryString = "SELECT * FROM burgers";
     connection.query(queryString, function(err, result) {
       if (err) throw err;
-
       callback(result);
-
     });
   },
   insertOne: function(burgerName, callback) {
@@ -20,8 +18,7 @@ var orm = {
       if (err) {
         throw err;
       }
-
-      callback(result);
+    callback(result);
     });
   },
   updateOne: function(burger_id, callback) {
@@ -43,5 +40,4 @@ var orm = {
     );
   }
 };
-
 module.exports = orm;
