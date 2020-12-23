@@ -9,25 +9,26 @@ router.get('/', function(req, res) {
 
 router.get('/index', function(req, res) {
 	burger.selectAll(function(data) {
-		var hbsObject = {burgers: data};
-		res.render('index', hbsObject);
+		var burgerData = {
+			burgers: data
+		};
+		res.render("index", burgerData)
 	});
 });
 
 
-router.post('/burgers/insertOne', function(req, res) {
-	burger.insertOne(['burger_name', 'devoured'], [req.body.name, false], function() {
-		res.redirect('/index');
+router.post('api/burger', function(req, res) {
+	burger.insertOne(req.body.burger_name, function(data){
+		res.json({ok: true});
+	});
 	});
 });
 
 
-router.put('/burgers/:id', function(req, res) {
-	var condition = 'id = ' + req.params.id;
-	console.log('condition', condition);
-
-	burger.updateOne({devoured: req.body.devoured}, condition, function() {
-		res.redirect('/index');
+router.put('api/burgers/:id', function(req, res) {
+	var burgerID = req.params.id;
+	burger.updateOne(burgerID, function(data){
+		res.json({ok:true});
 	});
 });
 
