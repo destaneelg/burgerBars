@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser"); 
-const methodOverride = require("method-override");
 
 var PORT = process.env.PORT || 8080;
 const app = express();
