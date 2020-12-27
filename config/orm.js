@@ -1,43 +1,70 @@
 var connection = require("../config/connection.js");
-var orm = {
-  selectAll: function(callback) {
-    var queryString = "SELECT * FROM burgers";
-    connection.query(queryString, function(err, result) {
-      if (err) throw err;
-      callback(result);
-    });
-  },
-  insertOne: function(burgerName, callback) {
-    var queryString = "INSERT INTO burgers SET ?";
-    connection.query(queryString, [
-      {
-        name: burgerName
-      }
-    ], 
-    function(err, result) {
-      if (err) {
-        throw err;
-      }
-    callback(result);
-    });
-  },
-  updateOne: function(burger_id, callback) {
-    var queryString = "UPDATE burgers SET ? WHERE ?";
 
-    connection.query(queryString, [
-      {
-      devoured: true
-      },
-      {
-      id: burger_id
+function questionMarks(num) {
+  var arr = []; 
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
+  }
+  return arr.toString();
+}
+sqlhelper(obj) {
+  var arr = [];
+  for (var key in ob) {
+    var value = ob[key];
+    if (Object.hasOwnProperty.call(ob, key)) {
+      if(typeof value === "string" && value.indexOf( " ") >= 0){
+        value = "'" + value + "'" ;
       }
-    ], 
-    function(err, result) {
-      if (err) throw err;
-
-      callback(result);
+      arr.push(key + "=" + value)
     }
-    );
+  }
+  return arr.toString();
+}
+var orm = {
+  selectAll: function(table, cb) {
+    var queryString = "SELECT * FROM " + table +  ";";
+
+    connection.query(queryString, function(err, res) {
+      if (err){
+        throw err
+      };
+      cb(re);
+    });
+  },
+  insertOne: function(table, cols, vals, cb) {
+    var queryString = "INSERT INTO " + table +
+    " (" +
+    cols.toString() +
+    ") " +
+    "VALUES (" +
+    questionMarks(vals.length) +
+    ") ";
+
+    console.log(queryString); 
+
+    connection.query(queryString, vals, function(err, res) {
+      if (err) {
+        throw err; 
+    }
+    cb(res)  
+    });
+  },
+  updateOne: function(table, objColVals, condition ,cb) {
+    var queryString = "UPDATE " + table +
+    " SET " +
+    sqlhelper(objColVals) +
+    " WHERE " +
+    condition;
+
+    console.log(queryString); 
+
+    connection.query(queryString, vals, function(err, res) {
+      if (err) {
+        throw err; 
+    }
+    cb(res)  
+    ;
+    });
   }
 };
 module.exports = orm;

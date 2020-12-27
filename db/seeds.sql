@@ -1,4 +1,2 @@
-
-INSERT INTO burgers (name, devoured) VALUES ('Shopper', false);
-INSERT INTO burgers (name, devoured) VALUES ('HipModdy', false);
-INSERT INTO burgers (name, devoured) VALUES ('Trouble Trouble', false);
+USE burgers_db;
+INSERT INTO burgers (name, devoured) VALUES ('Shopper', false),  ('Trouble Trouble', false), ('HipModdy', false)

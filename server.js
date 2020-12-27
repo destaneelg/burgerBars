@@ -1,14 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser"); 
-
-var PORT = process.env.PORT || 8080;
-const app = express();
-
 const exphbs = require("express-handlebars");
+
+const app = express();
+let PORT = process.env.PORT || 8080;
+
 app.use(express.static("public"));
 
+
 app.use(bodyParser.urlencoded({ 
-    extended: false }));
+    extended: true }));
 app.use(bodyParser.json());
 
 
@@ -19,4 +20,9 @@ const routes = require("./controllers/burgers_controller.js");
 
 app.use(routes);
 
-app.listen(PORT);
+app.listen(PORT), function () {
+    console.log("Server listening.")
+};
+
+
+
