@@ -7,7 +7,7 @@ function questionMarks(num) {
   }
   return arr.toString();
 }
-sqlhelper(obj) {
+function sqlhelper(ob) {
   var arr = [];
   for (var key in ob) {
     var value = ob[key];
@@ -28,7 +28,7 @@ var orm = {
       if (err){
         throw err
       };
-      cb(re);
+      cb(res);
     });
   },
   insertOne: function(table, cols, vals, cb) {
@@ -58,7 +58,7 @@ var orm = {
 
     console.log(queryString); 
 
-    connection.query(queryString, vals, function(err, res) {
+    connection.query(queryString, function(err, res) {
       if (err) {
         throw err; 
     }
